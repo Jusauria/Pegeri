@@ -1,0 +1,20 @@
+New user comes in.
+Sees log in screen.
+
+If has account will do a search for user and see if the password is ok
+If has no account it will see if the username is unique and then saves in database
+
+--- New user see ---
+On top is user with userInformation
+    --- Name
+    --- password
+    --- change password
+    --- pet list alive
+    --- pet list dead
+
+main location
+- if no pet found to this user then it will show two you can choose
+- by clicking on them you get the pet
+- status and co will be shown and blah blah blah
+
+take care game then.
