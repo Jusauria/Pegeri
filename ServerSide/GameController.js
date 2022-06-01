@@ -9,42 +9,6 @@ function GameController(dao){
     this.gameDAO = dao;
     
     
-    this.addField= async(req,res)=>{
-        
-        let game = await this.gameDAO.getGameWithId(req.params.gameid);
-        
-        let newField = new Fields(req.params.fieldid);
-        game.fieldlist.push(newField);
-        this.gameDAO.updateGame(game);
-        res.send(JSON.stringify("Success"))
-    }
-    this.joinGame=async(req,res)=>{
-        
-        let game = await this.gameDAO.getGameWithId(req.params.gameid);
-        res.send(JSON.stringify(game));
-    }
-    this.findNextField=async(req,res)=>{
-        
-        let game = await this.gameDAO.getGameWithId(req.params.gameid);
-        
-        
-        let avaiable=[1,2,3,4,5,6,7,8,9];
-        game.fieldlist.forEach(e => {
-            
-            for(let i=0;i<avaiable.length;i++){
-                if(e.fieldId==avaiable[i]){
-                    avaiable.splice(i,1);
-                }
-            }
-        });
-        let field = new Fields(avaiable[0]);
-        game.fieldlist.push(field);
-        if(game.mode==1){
-            this.gameDAO.updateGame(game);
-        }
-        res.send(JSON.stringify(field));
-    }
-    
     this.login=async(req,res)=>{
         let user = await this.gameDAO.findUserByName(req.params.user);
         if(user!=null&& user.password==toHash(req.params.pass)){
@@ -64,10 +28,19 @@ function GameController(dao){
             let user = new User(req.params.user,toHash(req.params.pass));
             this.gameDAO.insertUser(user);
             res.send(JSON.stringify(user));
-        }
-        
-        
+        }   
     }
+
+
+    this.getUser=async(req,res)=>{
+        res.send(JSON.stringify(await this.gameDAO.findUserByName(req.params.username)));
+    }
+    this.update=async(req,res)=>{
+        hoi(req.params.pets)
+        await this.gameDAO.updateUser(req.params.userID,req.params.pets);
+        res.send("Updated");
+    }
+
     
     this.getFile=(req,res)=>{
         res.sendFile(req.params.name,{root: '../'});

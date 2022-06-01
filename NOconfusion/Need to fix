@@ -1,1 +1,6 @@
+Fix/bugs:
 -Server start by regesting file with the server aka /file/:name
+
+
+Need to continue:
+-fix double evoltion on client ^^

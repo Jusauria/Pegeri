@@ -1,9 +1,6 @@
-let user;
-
-const baseUrl = "http://localhost:5010/pegeri/";
-
 
 document.getElementById("sendLogin").onclick=()=>{
+    console.log(ajaxCall);
     ajaxCall("GET", baseUrl+"login/"+document.getElementById("user").value+"/"+
     document.getElementById("pass").value,canGoOn);
 }
@@ -13,27 +10,14 @@ document.getElementById("register").onclick=()=>{
     document.getElementById("pass1").value,canGoOn);
 }
 
-function ajaxCall(method, url, callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open(method, url, true);
-    xhr.send();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                callback(xhr.responseText);
-            } else {
-                console.log("xhr failed: " + xhr.status);
-            }
-        }
-    };
-}
+
 
 function canGoOn(result){
-    user = JSON.parse(result);
+    console.log(JSON.parse(result))
+    let user = JSON.parse(result);
+    
     if(user!=null){
+        localStorage.setItem("currentUser",user.name);
         window.open("./main.html");
     }
-    
 }
-
-module.exports= user;
