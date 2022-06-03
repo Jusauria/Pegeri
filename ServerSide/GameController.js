@@ -36,7 +36,6 @@ function GameController(dao){
         res.send(JSON.stringify(await this.gameDAO.findUserByName(req.params.username)));
     }
     this.update=async(req,res)=>{
-        hoi(req.params.pets)
         await this.gameDAO.updateUser(req.params.userID,req.params.pets);
         res.send("Updated");
     }

@@ -7,7 +7,6 @@ let pet;
 ajaxCall("GET",baseUrl+"user/"+user,(result)=>{
     user= JSON.parse(result);
     loadPet();
-    hoi(user);
 });
 
 //---------- HTML Elements to change around --------
@@ -26,15 +25,10 @@ let money = getItems("money");
 
 //when user has no pets --> generate first pet
 function loadPet(){
-    hoi("hello");
-    hoi(user.pets.length==0);
-    hoi(user.pets[user.pets.length-1].alive==false)
     if(user.pets.length==0||user.pets[user.pets.length-1].alive==false){
-        hoi("hello")
         ajaxCall("GET",baseUrl+"getPet/"+user._id, myPetAjax);
     }else{
         myPet(user.pets[user.pets.length-1]);
-        hoi(pet)
     }
     
     function myPetAjax(userPet){
@@ -156,8 +150,6 @@ setInterval(()=>{
                 pet!=null
                 
             ){
-               evo=pet.status.age;
-                hoi(evo)
                 ajaxCall('PUT',baseUrl+"evolving/"+user._id,newPet);
             }
         });
@@ -168,13 +160,12 @@ setInterval(()=>{
 //check if it's dead --> Get new Pet Button to summon new pet
 setInterval(()=>{
     if(
-        happy.value>100 || happy.value <0 ||
-        hungry.value>100 || hungry.value <0 ||
-        clean.value>100 || clean.value <0 ||
-        sick.value>100 || sick.value <0 ||
-        smart.value>100 || smart.value <0 &&
+        happy.value>99 || happy.value <0 ||
+        hungry.value>99 || hungry.value <0 ||
+        clean.value>99 || clean.value <0 ||
+        sick.value>99 || sick.value <0 ||
+        smart.value>99 || smart.value <0 &&
         pet!=null){
-            hoi("Your pet is dead");
             ajaxCall('PUT',baseUrl+"death/"+user._id,()=>{
                 pet=null;
                 user.pets[user.pets.length-1].alive = false;
@@ -185,6 +176,5 @@ setInterval(()=>{
     },500);
 
     document.getElementById("newPet").onclick=()=>{
-        hoi("Time for another one")
         loadPet();
     }

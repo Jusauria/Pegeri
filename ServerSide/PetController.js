@@ -26,7 +26,6 @@ function PetController(dao){
         pet.body.body=await this.gameDAO.getBody("body",pet.stage,style[0]);
         
         let state = await this.gameDAO.addPetToArray(req.params.user,pet);
-        hoi(state)
         res.send(JSON.stringify(pet));
     }
 
@@ -134,7 +133,6 @@ function PetController(dao){
     }
 
     this.age=async(req,res)=>{
-        hoi("Age up");
         let stuff = await this.getPetObj(req.params.user)
         let pet = stuff[0];
         let user = stuff[1];
@@ -144,7 +142,6 @@ function PetController(dao){
         res.send(JSON.stringify(pet));
     }
     this.evo=async(req,res)=>{
-        hoi("Evolution");
         let stuff = await this.getPetObj(req.params.user)
         let pet = stuff[0];
         let user = stuff[1];
@@ -167,7 +164,6 @@ function PetController(dao){
         res.send(JSON.stringify(pet));
     }
     this.death=async(req,res)=>{
-        hoi("dead");
         let stuff = await this.getPetObj(req.params.user)
         let pet = stuff[0];
         let user = stuff[1];
