@@ -5,10 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pegeri</title>
+    
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </head>
 <body>
     <a href="./main.html"><button>To Main</button></a>
-    <div id="name"> Name </div>
+    <br>
+    <div id="name"> Name: </div>
     <div id="changePass"> <h3>Change Password</h3></div>
     <label for="oldPass">Old Password</label>
     <input type="text" id="oldPass">
@@ -16,20 +22,30 @@
     <label for="newPass"> New Password</label>
     <input type="text" id="newPass">
     <br>
+    <button id="passNow">Change</button>
+    <br>
     <div id="items">
         <h3>Items I got:</h3>
         <ol>
             <li>Nothing</li>
         </ol>
-
+        
     </div>
     <div id="pereList">
         <h3>Current Pegeri</h3>
-        <p id="currentPege">Here I am</p>
-
+        <div id="curentPet">
+            <p>Here I am</p>
+        </div>
+        
+        
         <h3>Dead Pegeri</h3>
-        <p id="deadPege">Here I am</p>
+        <div id="deadPet">
+            <p>Here I am</p>
+        </div>
+        
     </div>
-
+    
 </body>
+<script src="ajaxCalls.js"></script>
+<script src="profil.js"></script>
 </html>

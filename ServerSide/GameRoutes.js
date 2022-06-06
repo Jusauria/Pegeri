@@ -9,6 +9,7 @@ function GameRoutes(express, gameController,petController){
  
         this.expressApp.get(this.baseUrl+'login/:user/:pass',this.controller.login);
         this.expressApp.post(this.baseUrl+'register/:user/:pass',this.controller.register);
+        this.expressApp.put(this.baseUrl+'passUpdate/:userID/:pass',this.controller.updatePass);
 
         this.expressApp.get(this.baseUrl+'user/:username',this.controller.getUser);
         this.expressApp.put(this.baseUrl+'user/:userID/:pets',this.controller.update);

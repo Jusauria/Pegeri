@@ -39,6 +39,10 @@ function GameController(dao){
         await this.gameDAO.updateUser(req.params.userID,req.params.pets);
         res.send("Updated");
     }
+    this.updatePass=async(req,res)=>{
+        await this.gameDAO.updateUserPass(req.params.userID,toHash(req.params.pass));
+        res.send("Updated");
+    }
 
     
     this.getFile=(req,res)=>{

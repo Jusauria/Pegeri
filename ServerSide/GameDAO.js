@@ -35,9 +35,7 @@ function GameDAO(GameDbo){
         }
         this.updateUser= (userID,pets)=>{
             const query = { _id: userID};
-            hoi(pets);
             const set = { $set: {pets:["user.pets"]}}; //this might be wrong.
-            hoi(set);
             return new Promise((res,rej)=>{
                 this.dbo.collection("users").updateOne(
                     query,
@@ -116,6 +114,24 @@ function GameDAO(GameDbo){
             });
             
             }
+            this.updateUserPass= (userID,pass)=>{
+
+                const query = { 
+                    _id: new ObjectId(userID),
+                };
+                const set = { $set: {password:pass}}; //this might be wrong.
+                
+                return new Promise((res,rej)=>{
+                    this.dbo.collection("users").updateOne(
+                        query,
+                        set,
+                        (err,result)=>{
+                            if(err) rej(err);
+                            res("Success");
+                        })
+                });
+                
+                }
     }                
         
 module.exports = GameDAO
