@@ -14,7 +14,7 @@ function GameController(dao){
         if(user!=null&& user.password==toHash(req.params.pass)){
             res.send(JSON.stringify(user));
         }else{
-            res.send("Error: No user found or Password not correct").status(404);   
+            res.status(404).send("Error: No user found or Password not correct");   
         }
         
     }
@@ -23,7 +23,7 @@ function GameController(dao){
         let exist = await this.gameDAO.userExit(req.params.user);
         
         if(exist != null){
-            res.send("Name is already used!").status(406);
+            res.status(406).send("Name is already used!");
         } else{
             let user = new User(req.params.user,toHash(req.params.pass));
             this.gameDAO.insertUser(user);
@@ -42,11 +42,6 @@ function GameController(dao){
     this.updatePass=async(req,res)=>{
         await this.gameDAO.updateUserPass(req.params.userID,toHash(req.params.pass));
         res.send("Updated");
-    }
-
-    
-    this.getFile=(req,res)=>{
-        res.sendFile(req.params.name,{root: '../'});
     }
 }
 

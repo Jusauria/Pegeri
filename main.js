@@ -13,48 +13,33 @@ ajaxCall("GET",baseUrl+"user/"+user,(result)=>{
 function getItems(element){
     return document.getElementById(element)
 }
-
+//the elements from html
 let happy = getItems("happyLevel");
-let hungry = getItems("hungryLevel");
-let clean = getItems("hygieneLevel");
-let sick = getItems("sickStatus");
-let smart = getItems("smart");
-let age = getItems("age");
-let money = getItems("money");
-
+    let hungry = getItems("hungryLevel");
+    let clean = getItems("hygieneLevel");
+    let sick = getItems("sickStatus");
+    let smart = getItems("smart");
+    let age = getItems("age");
+    let money = getItems("money");
 
 //when user has no pets --> generate first pet
 function loadPet(){
     if(user.pets.length==0||user.pets[user.pets.length-1].alive==false){
-        ajaxCall("GET",baseUrl+"getPet/"+user._id, myPetAjax);
+        ajaxCall("GET",baseUrl+"getPet/"+user._id, (userPet)=>{
+            pet=JSON.parse(userPet);
+        });
     }else{
-        myPet(user.pets[user.pets.length-1]);
+       pet=user.pets[user.pets.length-1];
     }
     
-    function myPetAjax(userPet){
-        pet=JSON.parse(userPet);
-    }
-    function myPet(userPet){
-        pet=userPet;
-    }
 }
 
 //if user has pets --> display them or not
 {
-    function getBodyLink(id){
-        return new Promise((res,rej)=>{
-            ajaxCall("GET", baseUrl+"petBody/"+id,(link)=> {
-                res(JSON.parse(link) )
-            });
-        })
-        
-    }
-    
     setInterval(()=>{
         if(pet!=null){
             
             happy.value = pet.status.happy;
-            //document.getElementById("happyLevel").value = pet.status.happy;
             hungry.value = pet.status.hungry;
             clean.value = pet.status.clean;
             sick.value = pet.status.sick;
@@ -66,18 +51,30 @@ function loadPet(){
             let head = document.getElementById("head");
             let body = document.getElementById("body");
             
-            getBodyLink(pet.body.face._id).then((result)=>{
-                face.src=result
-            });
+            if(pet.body.face!=null){
+                face.style.display='';
+                getBodyLink(pet.body.face._id).then((result)=>{
+                    face.src=result
+                });
+            }else{
+                face.style.display='none'
+            }
+            
             if(pet.body.head!=null){
+                head.style.display ='';
                 getBodyLink(pet.body.head._id).then((result)=>{
                     head.src=result
                 }); 
+            }else{
+                head.style.display ='none';
             }
-            
-            getBodyLink(pet.body.body._id).then((result)=>{
-                body.src=result
-            });      
+            if(pet.body.body!=null){
+                body.style.display ='';
+                getBodyLink(pet.body.body._id).then((result)=>{
+                    body.src=result
+                });     
+            }
+             
         }else{
             allClean();
         }
@@ -92,9 +89,9 @@ function allClean(){
     smart.value = ""
     age.value = ""
     money.value = ""
-    document.getElementById("face").src="";
-    document.getElementById("head").src="";
-    document.getElementById("body").src="";
+    document.getElementById("face").style.display='none';
+    document.getElementById("head").style.display='none';
+    document.getElementById("body").style.display='none';
 }
 //send the database all 10 seconds an update on the pet
 
@@ -102,12 +99,10 @@ setInterval(()=>{
     if(pet != null){
         ajaxCall('PUT',baseUrl+"downPet/"+user._id,newPet);
     }
-},4000)
+},3000)
 
 function newPet(newPet){
     pet=JSON.parse(newPet);
-
-    
 }
 //buttons get functions and change values of stuff
 {
@@ -150,14 +145,26 @@ setInterval(()=>{
                 pet!=null
                 
             ){
+                tempAlert('Pet Evolved',1500);
                 ajaxCall('PUT',baseUrl+"evolving/"+user._id,newPet);
             }
         });
     }
 },/*1000*60*/ 4000)
 
+function tempAlert(msg,duration)
+{
+ var el = document.createElement("div");
+ el.setAttribute("style","position:absolute;top:30px;left:20;background-color:green;padding:5px");
+ el.innerHTML = msg;
+ setTimeout(function(){
+  el.parentNode.removeChild(el);
+ },duration);
+ document.body.appendChild(el);
+}
 
 //check if it's dead --> Get new Pet Button to summon new pet
+let newPetButton = document.getElementById('newPet');
 setInterval(()=>{
     if(
         happy.value>99 || happy.value <0 ||
@@ -166,15 +173,25 @@ setInterval(()=>{
         sick.value>99 || sick.value <0 ||
         smart.value>99 || smart.value <0 &&
         pet!=null){
+            tempAlert("Your Pet died!",2000)
             ajaxCall('PUT',baseUrl+"death/"+user._id,()=>{
                 pet=null;
                 user.pets[user.pets.length-1].alive = false;
                 //make new pet button visible and useable
+                newPetButton.classList.remove('invisible');
+                buttonDisable(true);
             });
         }
-
     },500);
 
     document.getElementById("newPet").onclick=()=>{
         loadPet();
+        newPetButton.classList.add('invisible');
+        buttonDisable(false);
+    }
+    function buttonDisable(state){
+        let buttons=document.querySelectorAll('button')
+        for(let i=1;i<buttons.length-1;i++){
+            buttons[i].disabled = state;
+        }
     }

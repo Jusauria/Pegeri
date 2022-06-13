@@ -4,58 +4,88 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <title>Pegeri</title>
+    
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </head>
-<body>
-    <section id="profil">
-        <a href="./profil.html"><button>Profil</button></a>
-    </section>
-    <section class="status">
-        <label for="age">Age:</label>
-        <input type="number" id="age" size="1" disabled>
-        <br>
-        <label for="money">Money:</label>
-        <input type="number" id="money" size="1" disabled>
-        <br>
-
-        <label for="happyLevel">Happy:</label>
-        <input type="number" id="happyLevel" size="1" disabled> /99
-
-        <label for="hungryLevel">Hungry:</label>
-        <input type="number" id="hungryLevel" size="1" disabled> /99
-
-        <label for="hygieneLevel">Clean:</label>
-        <input type="number" id="hygieneLevel" size="1" disabled> /99
-
-        <label for="sickStatus">Sick:</label>
-        <input type="number" id="sickStatus" size="1" disabled> 
-
-        <label for="smart">Inteligence:</label>
-        <input type="number" id="smart" size="1" disabled> /99
-
-    </section>
-    <button id="food">Food</button>
-    <button id="play">Play</button>
-    <button id="medicine">Medicine</button>
+<body class="m-2 p-2 border border-3">
     
-    <br>
+    <div class="container  col-7">
+        <section id="profil" class="text-end">
+            <a href="./profil.html"><button>Profil</button></a>
+        </section>
+        <section class="status">
+            
+            
+            <label for="age">Age:</label>
+            <input class="col-1" type="number" id="age" size="1" disabled>
+            <p class="col-1" type="number" id="age" value="0"></p>
 
-    <button id="education">School</button>
-    <button id="wash">Washing</button>
-    <button id="shop">Shop</button>
-    <br>
-
-    <div id="petStands">
-       <img id="face">
-       <img id="head">
-       <img id="body">
+            <label for="money">Money:</label>
+            <input class="col-1" type="number" id="money" size="1" disabled>
+            <hr>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 mb-2">
+                        <label for="happyLevel">Happy:</label>
+                        <input class="col-3" type="number" id="happyLevel" size="1" disabled> /99
+                    </div>
+                    <div class="col-4">
+                        <label for="hungryLevel">Hungry:</label>
+                        <input class="col-3" type="number" id="hungryLevel" size="1" disabled> /99
+                    </div>
+                    <div class="col-4">
+                        <label for="hygieneLevel">Clean:</label>
+                        <input class="col-3" type="number" id="hygieneLevel" size="1" disabled> /99
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <label for="sickStatus">Sick:</label>
+                        <input class="col-3" type="number" id="sickStatus" size="1" disabled>/99 
+                    </div>
+                    
+                    
+                    <div class="col-4">
+                        <label for="smart">Inteligence:</label>
+                        <input class="col-3" type="number" id="smart" size="1" disabled> /99
+                    </div>
+                    
+                    
+                </div>
+                
+                
+                
+            </div>
+            
+            <hr>
+        </section>
+        <button id="food">Food</button>
+        <button id="play">Play</button>
+        <button id="medicine">Medicine</button>
+                
+        <button id="education">School</button>
+        <button id="wash">Washing</button>
+        <button id="shop">Shop</button>
+        <br>
+        
+        <div id="petStands" >
+            <img class="position-absolute" id="head" referrerpolicy="no-referrer" />
+            <img class="position-absolute" id="face" referrerpolicy="no-referrer" >
+            <img id="body" referrerpolicy="no-referrer" >
+        </div>
+        <br>
+        
+        <button class="invisible" id="newPet">Your Pet died, get a new one</button>
     </div>
-    <br>
+</body>   
 
-    <button id="newPet">Your Pet died, get a new one</button>
-    
-</body>    
-    <script src="ajaxCalls.js"></script>
-    <script src="main.js"></script>
+<script src="ajaxCalls.js"></script>
+<script src="main.js"></script>
+<link rel="stylesheet" href="style.css">
+
 </html>

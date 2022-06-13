@@ -1,7 +1,6 @@
 let hoi =(string='hoi')=>console.log(string)
 
 const baseUrl = "http://localhost:5010/pegeri/";
-//const baseUrl = "http://10.101.104.62:5010/pegeri/";
 function ajaxCall(method, url, callback) {
     let xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
@@ -11,7 +10,8 @@ function ajaxCall(method, url, callback) {
             if (xhr.status === 200) {
                 callback(xhr.responseText);
             } else {
-                console.log("xhr failed: " + xhr.status);
+                console.log("xhr failed: " + xhr.status)
+                alert(xhr.responseText);
             }
         }
     };

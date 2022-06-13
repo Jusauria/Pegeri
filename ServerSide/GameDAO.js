@@ -96,12 +96,12 @@ function GameDAO(GameDbo){
                     })
             });
         }
-        this.updateUserPet= (userID,pet,number)=>{
+        this.updateUserPet= (userID,pet)=>{
             const query = { 
                 _id: new ObjectId(userID),
                 "pets.alive": true
             };
-            const set = { $set: { "pets.$":pet}}; //this might be wrong.
+            const set = { $set: { "pets.$":pet}}; 
             
             return new Promise((res,rej)=>{
                 this.dbo.collection("users").updateOne(

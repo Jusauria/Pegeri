@@ -1,7 +1,5 @@
 Fix/bugs:
--Server start by regesting file with the server aka /file/:name
--when clicken on the button you see for short the dead pet
+-Sometimes the body items in profil don't display or are wrong moved even if they shouldn't.
 
 
 Need to continue:
--start with profil ^^
